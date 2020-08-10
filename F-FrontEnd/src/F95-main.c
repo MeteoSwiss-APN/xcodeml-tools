@@ -151,7 +151,8 @@ static void usage()
         "-endlineno                output the endlineno attribute.", "",
         "internal options:", "-d                        enable debug mode.",
         "-no-module-cache          always load module from file.",
-        "--version                 display frontend version information.",
+        "--version                 display frontend version information."
+        "--version-tag             display frontend version tag (if any).",
 
         NULL};
     const char *const *p = usages;
@@ -164,7 +165,7 @@ static void usage()
 }
 
 void print_version() {
-    fprintf(stderr, "%s", PACKAGE_STRING, PACKAGE_VERSION);
+    fprintf(stderr, "%s", PACKAGE_STRING);
     if(strlen(PACKAGE_VERSION_TAG) > 0)
     { fprintf(stderr, " \"%s\"", PACKAGE_VERSION_TAG); }
     fprintf(stderr, "\n");
