@@ -41,6 +41,7 @@ if test "x$with_native_fortran_compiler" = "xyes"; then
 else
     AC_MSG_NOTICE(["fortran native compiler check disabled"])
 fi
+AC_SUBST(WITH_NATIVE_FORTRAN_COMPILER, $with_native_fortran_compiler)
 
 #AC_PROG_MAKE_SET
 AC_PROG_AWK
