@@ -4,7 +4,7 @@ AC_CONFIG_AUX_DIR([./buildutils])
 AC_CONFIG_MACRO_DIR([./buildutils])
 AC_CANONICAL_TARGET
 AC_CONFIG_SRCDIR([include/exc_platform.h])
-AC_CONFIG_HEADER([include/config.h Driver/atool/src/include/nata/nata_config.h])
+AC_CONFIG_HEADER([include/config.h Driver/atool/src/include/nata/nata_config.h ])
 
 #--------------------------------------------------------------------
 # Bash function for trimming strings
@@ -1076,5 +1076,6 @@ AC_CONFIG_FILES(Driver/bin/Makefile)
 AC_CONFIG_FILES(Driver/bin/C_Back)
 AC_CONFIG_FILES(Driver/bin/F_Back)
 AC_CONFIG_FILES(Makefile)
+AC_CONFIG_FILES(XcodeML-Common/src/xcodeml/util/AppConstants.java)
 
 AC_OUTPUT

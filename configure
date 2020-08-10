@@ -10044,6 +10044,8 @@ ac_config_files="$ac_config_files Driver/bin/F_Back"
 
 ac_config_files="$ac_config_files Makefile"
 
+ac_config_files="$ac_config_files XcodeML-Common/src/xcodeml/util/AppConstants.java"
+
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -10770,6 +10772,7 @@ do
     "Driver/bin/C_Back") CONFIG_FILES="$CONFIG_FILES Driver/bin/C_Back" ;;
     "Driver/bin/F_Back") CONFIG_FILES="$CONFIG_FILES Driver/bin/F_Back" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
+    "XcodeML-Common/src/xcodeml/util/AppConstants.java") CONFIG_FILES="$CONFIG_FILES XcodeML-Common/src/xcodeml/util/AppConstants.java" ;;
 
   *) as_fn_error $? "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac
