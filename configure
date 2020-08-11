@@ -707,6 +707,7 @@ LEX
 YFLAGS
 YACC
 AWK
+WITH_NATIVE_FORTRAN_COMPILER
 ac_ct_FC
 FCFLAGS
 FC
@@ -774,6 +775,7 @@ ac_subst_files=''
 ac_user_opts='
 enable_option_checking
 with_version_tag
+with_native_fortran_compiler
 with_libxml2
 with_libxml2_include
 with_libxml2_lib
@@ -1441,6 +1443,7 @@ Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
   --with-version-tag=<tag> Add arbitrary string tag to the xcodeml-tools version
+  --without-native-fortran-compiler  Disable Fortran native compiler check
   --with-libxml2=DIR          specify prefix directory for installed libxml2 package (default: /usr)
                               Equivalent to --with-libxml2-include=PATH/include plus --with-libxml2-lib=PATH/lib64
   --with-libxml2-include=DIR  specify directory for installed libxml2 include files
@@ -2969,6 +2972,17 @@ realpath ()
 }
 
 #--------------------------------------------------------------------
+
+
+# Check whether --with-native-fortran-compiler was given.
+if test "${with_native_fortran_compiler+set}" = set; then :
+  withval=$with_native_fortran_compiler;
+else
+  with_native_fortran_compiler=yes
+fi
+
+
+#--------------------------------------------------------------------
 # Save environmental variables set by user before AC_PROG_CC and so on.
 userCFLAGS=${CFLAGS}
 
@@ -4438,7 +4452,9 @@ ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
-ac_ext=${ac_fc_srcext-f}
+
+if test "x$with_native_fortran_compiler" = "xyes"; then
+    ac_ext=${ac_fc_srcext-f}
 ac_compile='$FC -c $FCFLAGS $ac_fcflags_srcext conftest.$ac_ext >&5'
 ac_link='$FC -o conftest$ac_exeext $FCFLAGS $LDFLAGS $ac_fcflags_srcext conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_fc_compiler_gnu
@@ -4648,6 +4664,13 @@ ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
 ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
 ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+else
+    { $as_echo "$as_me:${as_lineno-$LINENO}: \"fortran native compiler check disabled\"" >&5
+$as_echo "$as_me: \"fortran native compiler check disabled\"" >&6;}
+fi
+WITH_NATIVE_FORTRAN_COMPILER=$with_native_fortran_compiler
+
 
 #AC_PROG_MAKE_SET
 for ac_prog in gawk mawk nawk awk
@@ -7908,6 +7931,7 @@ else
 fi
 
 
+if test "x$with_native_fortran_compiler" = "xyes"; then
 # Check whether --enable-mod2xmod was given.
 if test "${enable_mod2xmod+set}" = set; then :
   enableval=$enable_mod2xmod; domod2xmod=yes
@@ -7915,6 +7939,7 @@ else
   domod2xmod=no
 fi
 
+fi
 
 # Check whether --enable-gnu-extension was given.
 if test "${enable_gnu_extension+set}" = set; then :
@@ -7996,6 +8021,8 @@ fi
 
 
 #--------------------------------------------------------------------
+if test "x$with_native_fortran_compiler" = "xyes"; then
+
 # check --enable-mod2xmod
 if test "x${target}" = "xKcomputer-linux-gnu" -o "x${target}" = "xFX10-linux-gnu" -o "x${target}" = "xFX100-linux-gnu"; then
   KIND_FORTRAN=frtpx
@@ -8096,6 +8123,17 @@ if test "$NEED_MAKE_MOD2XMOD" = $TRUE; then
 
 fi
 
+else # with_native_fortran_compiler != yes
+
+NEED_MAKE_MOD2XMOD=$FALSE
+KIND_FORTRAN=none
+MOD2XMOD=$FALSE
+
+
+
+
+
+fi # with_native_fortran_compiler = yes
 #--------------------------------------------------------------------
 # check Perl versoin is 5
 # Extract the first word of "perl", so it can be a program name with args.
