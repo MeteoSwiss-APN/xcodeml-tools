@@ -32,7 +32,7 @@ test: all
 		cd F-FrontEnd/src && bash ./compile_all_test.sh;\
 	else\
 	    echo "Fortran tests disabled because of --without-native-fortran-compiler";\
-    fi
+	fi
 	cd test/C99; make clean; make CC=$(CC)
 
 install:
