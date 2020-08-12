@@ -120,6 +120,7 @@ class TerminalColor:
     BLACK = '\033[30m'
     RED = '\033[31m'
     GREEN = '\033[32m'
+    RESET = '\033[m'
 
 
 def to_paragraph(p: Union[str, bytes], prefix: str = ''):
@@ -129,7 +130,7 @@ def to_paragraph(p: Union[str, bytes], prefix: str = ''):
 
 
 def error_text(s: str):
-    return TerminalColor.RED + s + TerminalColor.BLACK
+    return TerminalColor.RED + s + TerminalColor.RESET
 
 
 class TestCaseResult(NamedTuple):
