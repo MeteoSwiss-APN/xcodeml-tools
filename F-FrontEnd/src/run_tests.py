@@ -755,9 +755,8 @@ class TestRunner:
                         if debug_output: print('\t\t' + dep)
         testcase_dep_lst = {}
         # Convert dependency trees into lists
-        for test_case, direct_deps in testcase_deps.items():
+        for test_case, test_case_direct_deps in testcase_deps.items():
             lst = []
-            test_case_direct_deps = testcase_deps[test_case]
             visited = set()
             for dir_dep in test_case_direct_deps:
                 if dir_dep in visited:
