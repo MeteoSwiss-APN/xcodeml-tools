@@ -563,7 +563,7 @@ class TestRunner:
                             help='Transform coarray statement to xmp subroutine call statement')
         parser.add_argument('-j', '--jobs', type=int, default=1,
                             help='Number of tests to run simultaneously')
-        parser.add_argument('-r', '--break-on-failed', type=bool, default=False,
+        parser.add_argument('-r', '--break-on-failed', action='store_true',
                             help='Stop test run on failed test. Does not apply to parallel jobs')
         parser.add_argument('-o', '--save-report', type=str, default='',
                             help='Path to XML report file, where results should be saved')
