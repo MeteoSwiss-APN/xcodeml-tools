@@ -8102,7 +8102,6 @@ else
 		metrowerks:	__MWERKS__
 		watcom:		__WATCOMC__
 		tcc:		__TINYC__
-		pgi:        __PGI
 		unknown:	UNKNOWN
 	"
 	for ventest in $vendors; do
@@ -8147,11 +8146,11 @@ CC_VENDOR="$ax_cv_c_compiler_vendor"
 
 if test "${userCFLAGS}" != ""; then
     CFLAGS="${userCFLAGS}"
-elif test "CC_VENDOR" = "gnu"; then
+elif test "$CC_VENDOR" = "gnu"; then
     CFLAGS="-O2 -std=gnu99 -Wall -Wpointer-arith -fopenmp"
-elif test "CC_VENDOR" = "intel"; then
+elif test "$CC_VENDOR" = "intel"; then
     CFLAGS="-O2 -qopenmp"
-elif test "CC_VENDOR" = "pgi"; then
+elif test "$CC_VENDOR" = "portland"; then
     CFLAGS="-fast -c99 -mp"
 fi
 
