@@ -779,4 +779,4 @@ class TestRunner:
 
 if __name__ == '__main__':
     res = TestRunner().run(True)
-    exit(RC.SUCCESS.value if res.result else RC.FAILURE.value)
+    sys.exit(RC.SUCCESS.value if res.result else RC.FAILURE.value)
