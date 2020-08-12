@@ -145,9 +145,11 @@ class TestCaseResult(NamedTuple):
             txt += '%s\n' % s.type
             if not s.result:
                 if s.args is not None:
-                    txt += 'Args:\n%s\n' % to_paragraph(s.args, '\t')
+                    args_txt = to_paragraph(s.args, '\t')
+                    txt += f'Args:\n{args_txt}\n'
                 if s.error_log is not None:
-                    txt += error_text('Output:\n%s\n' % to_paragraph(s.error_log, '\t'))
+                    error_log_txt = to_paragraph(s.error_log, '\t')
+                    txt += error_text(f'Output:\n{error_log_txt}\n')
         if self.exception is not None:
             txt += error_text('Exception:\n' + to_paragraph(self.exception, '\t'))
         return txt
@@ -565,7 +567,7 @@ class TestRunner:
                             help='Number of tests to run simultaneously')
         parser.add_argument('-r', '--break-on-failed', action='store_true',
                             help='Stop test run on failed test. Does not apply to parallel jobs')
-        parser.add_argument('-o', '--save-report', type=str, default='',
+        parser.add_argument('-o', '--save-report', type=str, default=None,
                             help='Path to XML report file, where results should be saved')
         p_args = parser.parse_args()
         assert file_exists(p_args.frontend_bin), 'Frontend executable  not found'
