@@ -525,17 +525,6 @@ class TestRunner:
         self.__args = args
 
     @staticmethod
-    def bool_str(v):
-        if isinstance(v, bool):
-            return v
-        elif v.lower() in ('yes', 'true', 't', 'y', '1'):
-            return True
-        elif v.lower() in ('no', 'false', 'f', 'n', '0'):
-            return False
-        else:
-            raise argparse.ArgumentTypeError('Boolean value expected')
-
-    @staticmethod
     def get_native_compiler_type(native_compiler: str) -> NativeCompiler:
         p = subprocess.run(args=[native_compiler, '--version'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         assert p.returncode == 0, 'Native compiler check failed'
@@ -555,8 +544,7 @@ class TestRunner:
                             help='Path to backend executable F_back')
         parser.add_argument('-x', '--xmodules-dir', type=str, required=True,
                             help='Directory, where intrinsic modules are located')
-        parser.add_argument('-v', '--verbose', type=TestRunner.bool_str, default=False,
-                            help='Verbose output')
+        parser.add_argument('-v', '--verbose', action='store_true', help='Verbose output')
         parser.add_argument('-d', '--input-tests-dir', type=str,
                             default=real_path(join_path(THIS_DIR_PATH, TEST_DATA_DEFAULT_RELATIVE_PATH)),
                             help='Input test data directory (default: %s)' % TEST_DATA_DEFAULT_RELATIVE_PATH)
@@ -571,7 +559,7 @@ class TestRunner:
                             help='Output error log (default: %s in current working dir )' % DEFAULT_ERROR_LOG_FILENAME)
         parser.add_argument('-p', '--number-of-parallel-tests', type=int, default=1,
                             help='Maximum number of tests allowed to run in parallel')
-        parser.add_argument('-t', '--enable-coarray-to-xmp-transform', type=TestRunner.bool_str, default=False,
+        parser.add_argument('-t', '--enable-coarray-to-xmp-transform', action='store_true',
                             help='Transform coarray statement to xmp subroutine call statement')
         parser.add_argument('-j', '--jobs', type=int, default=1,
                             help='Number of tests to run simultaneously')
