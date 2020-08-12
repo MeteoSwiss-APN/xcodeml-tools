@@ -455,7 +455,6 @@ def prepare_dir(dir_path=None, parent_dir=None):
     if dir_path is not None:
         os.makedirs(dir_path, exist_ok=True)
         yield dir_path
-        pass
     else:
         d = tempfile.TemporaryDirectory(dir=parent_dir)
         yield d.name
