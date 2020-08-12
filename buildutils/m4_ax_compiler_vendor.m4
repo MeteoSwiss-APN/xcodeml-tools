@@ -92,6 +92,7 @@ AC_DEFUN([AX_COMPILER_VENDOR], [dnl
 		metrowerks:	__MWERKS__
 		watcom:		__WATCOMC__
 		tcc:		__TINYC__
+		pgi:        __PGI
 		unknown:	UNKNOWN
 	"
 	for ventest in $vendors; do
