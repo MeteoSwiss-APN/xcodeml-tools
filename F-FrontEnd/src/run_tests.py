@@ -685,7 +685,7 @@ class TestRunner:
         fortran_id = '[a-z][a-z0-9\_]*'
         module_decl = 'module' + spaces + ('(%s)' % fortran_id)
         submodule_name = '[\sa-z0-9\_]+'
-        submodule_decl = 'submodule' + opt_spaces + ('\((%s)\)' % submodule_name) + opt_spaces + ('(%s)' % fortran_id)
+        submodule_decl = f'submodule{opt_spaces}\(({submodule_name})\){opt_spaces}({fortran_id})'
         reg_space = re.compile('\s')
         reg_module_decl = re.compile(module_decl)
         reg_submodule_decl = re.compile(submodule_decl)
