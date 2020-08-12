@@ -494,8 +494,7 @@ class TestResult(NamedTuple):
         parser = etree.XMLParser(schema=schema)
         with open(filename, 'r') as f:
             xml = f.read()
-        root = etree.fromstring(xml, parser)
-        pass  # There wil lbe a crash in case validation fails
+        etree.fromstring(xml, parser)
 
     def save_to_file(self, filename):
         duration = DT.us_duration(self.start_timestamp, self.end_timestamp)
