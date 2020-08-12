@@ -582,6 +582,7 @@ class TestRunner:
         assert p_args.number_of_parallel_tests >= 1, 'Number of parallel test should be at least 1'
         native_compiler = shutil.which(p_args.native_compiler)
         assert native_compiler is not None, 'native compiler not found'
+        native_compiler = os.path.abspath(native_compiler)
         native_compiler_type = self.get_native_compiler_type(native_compiler)
         obj_sym_reader = shutil.which('nm')
         assert obj_sym_reader is not None, 'Utility for reading object files not found'
@@ -590,16 +591,24 @@ class TestRunner:
         if report_file is not None:
             if not os.path.isabs(report_file):
                 report_file = join_path(os.getcwd(), report_file)
+        frontend_bin = os.path.abspath(p_args.frontend_bin)
+        backend_bin = os.path.abspath(p_args.backend_bin)
+        xmodules_dir = os.path.abspath(p_args.xmodules_dir)
+        input_tests_dir = os.path.abspath(p_args.input_tests_dir)
+        working_dir = p_args.working_dir
+        if working_dir is not None:
+            working_dir = os.path.abspath(working_dir)
+        error_log = os.path.abspath(p_args.error_log)
         args = TesterArgs(num_parallel_tests=min(p_args.number_of_parallel_tests, multiprocessing.cpu_count()),
-                          frontend=p_args.frontend_bin,
-                          backend=p_args.backend_bin,
-                          xmodules_dir=p_args.xmodules_dir,
+                          frontend=frontend_bin,
+                          backend=backend_bin,
+                          xmodules_dir=xmodules_dir,
                           native_compiler=native_compiler,
                           native_compiler_type=native_compiler_type,
-                          errors_log=os.path.abspath(p_args.error_log),
-                          test_data_dir=p_args.input_tests_dir,
+                          errors_log=error_log,
+                          test_data_dir=input_tests_dir,
                           test_case=p_args.input_test,
-                          working_dir=p_args.working_dir,
+                          working_dir=working_dir,
                           verbose_output=p_args.verbose,
                           obj_sym_reader=obj_sym_reader,
                           jobs_num=p_args.jobs,
@@ -758,6 +767,8 @@ class TestRunner:
                 if dir_dep not in visited:
                     visited.add(dir_dep)
                     lst.append(dir_dep)
+                else:
+                    pass
             testcase_dep_lst[test_case] = tuple(lst)
         end_time = time.time()
         if debug_output: print('Elapsed time: ', end_time - start_time)
