@@ -22,7 +22,6 @@ xmlns="http://www.w3.org/TR/xhtml1/strict">
       </title>
       <style type="text/css">
       table,
-      th,
       td {
         padding: 10px;
         border: 1px solid black;
